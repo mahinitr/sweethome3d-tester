@@ -6,8 +6,11 @@ import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.Arrays;
 
 import com.eteks.sweethome3d.model.Label;
+import com.eteks.sweethome3d.model.TextStyle;
+import com.eteks.sweethome3d.model.Level;
 
 /**
  * test some properties and functionalities of Label class
@@ -27,7 +30,9 @@ public class TestLabel {
 	public TestLabel(String text, float x, float y) {
 		label = new Label(text, x, y);
 	}
-    
+    /*
+    * 
+    */
     public void testSetText(String text){
         this.label.setText(text);
     }
@@ -52,28 +57,71 @@ public class TestLabel {
         System.out.println("Y - " + String.valueOf(this.label.getY()));
     }
     
-    public void testSetStyle(String text){}
+    public void testSetStyle(TextStyle style){
+        this.label.setStyle(style);
+    }
     
-    public void testGetStyle() {}
+    public void testGetStyle() {
+        TextStyle style = this.label.getStyle();
+        System.out.println("Fontsize - " + String.valueOf(style.getFontSize()));
+        System.out.println("Is font Bold - " + String.valueOf(style.isBold()));
+        System.out.println("Is font italic - " + String.valueOf(style.isItalic()));
+    }
         
-    public void testSetAngle(String text){}
+    public void testSetAngle(float angle){
+        this.label.setAngle(angle);
+    }
     
-    public void testGeAngle() {}
+    public void testGeAngle() {
+        System.out.println("Angle - " + String.valueOf(this.label.getAngle()));
+    }
     
-    public void testSetLevel(String text){}
+    public void testSetLevel(Level level){
+        this.label.setLevel(level);
+    }
     
-    public void testGetLevel() {}
+    public void testGetLevel() {
+        Level level = this.label.getLevel();
+        System.out.println("Level name - " + level.getName());
+        System.out.println("Elevation - " + String.valueOf(level.getElevation()));
+        System.out.println("Floorthickness - " + String.valueOf(level.getFloorThickness()));
+        System.out.println("Height - " + String.valueOf(level.getHeight()));
+    }
         
-    public void testIsAtLevel() {}
+    public void testIsAtLevel(Level l) {
+        System.out.println("Is at Level - " + String.valueOf(this.label.isAtLevel(l)));
+    }
        
-    public void testGetPoints() {}
+    public void testGetPoints() {
+        float [][] points = this.label.getPoints();
+        System.out.println("Points - " + Arrays.deepToString(points));
+    }
     
-    public void testContainsPoint(String text){}
+    public void testAddPropertyChangeListener() {}
     
-    public void testMove(String text){}
+    public void testRemovePropertyChangeListener() {}
     
-    public void testClone(String text){}
+    
+    
+    public void testIntersectsRectangle(float a, float b, float c, float d){
+        System.out.println("Intersects Rectanle - " + String.valueOf(this.label.intersectsRectangle(a,b,c,d)));
+    }
+    
+    public void testContainsPoint(float x, float y, float m){        
+        System.out.println("Contains point - " + String.valueOf(this.label.containsPoint(x,y,m)));
+    }
+    
+    public void testMove(float a, float b){
+        this.label.move(a,b);
+    }
+    
+    public void testClone(){
+        Label clone = this.label.clone();
+        System.out.println("Cloned label - " + clone.getText());
+    }
    
+    public void testReadObject(){}
+    
     
     /**
      *  test readObject method of Label
@@ -97,13 +145,25 @@ public class TestLabel {
         tester.testGetY();
         System.out.println("\nTesting Setters.....");
         tester.testSetText("second-text");
-        tester.testSetX(40);
-        tester.testSetY(70);
+        tester.testGetPoints();
+        TextStyle style = new TextStyle(13.0f, true, true);
+        tester.testSetStyle(style);
+        tester.testSetAngle(12);
+        Level level = new Level("level-1", 25, 10, 100);
+        tester.testSetLevel(level);
+        
         System.out.println("\nTesting Getters.....");
         tester.testGetText();
         tester.testGetX();
         tester.testGetY();
+        tester.testGetStyle();
+        tester.testGeAngle();
+        tester.testGetLevel();
+        tester.testIsAtLevel(level);
+        tester.testGetPoints();        
+        
         System.out.println("\nTesting othe methods.....");
+        tester.testIntersectsRectangle
 	}
 
 }
