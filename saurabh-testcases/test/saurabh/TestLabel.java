@@ -3,6 +3,7 @@ package test.saurabh;
 import java.awt.geom.Rectangle2D;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -30,37 +31,66 @@ public class TestLabel {
 	public TestLabel(String text, float x, float y) {
 		label = new Label(text, x, y);
 	}
-    /*
-    * 
-    */
+    /**
+     *  test settext method of Label
+     * @param
+     */
     public void testSetText(String text){
         this.label.setText(text);
     }
     
+    /**
+     *  test gettext  method of Label
+     * @param
+     */
     public void testGetText() {
         System.out.println("Text - " + this.label.getText());
     }
     
+    /**
+     *  test setx method of Label
+     * @param
+     */
     public void testSetX(float X){
         this.label.setX(X);
     }
     
+    /**
+     *  test getx method of Label
+     * @param
+     */
     public void testGetX() {
         System.out.println("X - " + String.valueOf(this.label.getX()));
     }
     
+    /**
+     *  test sety method of Label
+     * @param
+     */
     public void testSetY(float Y){
         this.label.setY(Y);
     }
     
+    /**
+     *  test gety method of Label
+     * @param
+     */
     public void testGetY() {
         System.out.println("Y - " + String.valueOf(this.label.getY()));
     }
     
+    /**
+     *  test setStyle method of Label
+     * @param
+     */
     public void testSetStyle(TextStyle style){
         this.label.setStyle(style);
     }
     
+    /**
+     *  test getstyle method of Label
+     * @param
+     */    
     public void testGetStyle() {
         TextStyle style = this.label.getStyle();
         System.out.println("Fontsize - " + String.valueOf(style.getFontSize()));
@@ -68,18 +98,34 @@ public class TestLabel {
         System.out.println("Is font italic - " + String.valueOf(style.isItalic()));
     }
         
+     /**
+     *  test setangle  method of Label
+     * @param
+     */
     public void testSetAngle(float angle){
         this.label.setAngle(angle);
     }
     
+    /**
+     *  test getanlge method of Label
+     * @param
+     */
     public void testGeAngle() {
         System.out.println("Angle - " + String.valueOf(this.label.getAngle()));
     }
     
+    /**
+     *  test setlevel method of Label
+     * @param
+     */
     public void testSetLevel(Level level){
         this.label.setLevel(level);
     }
     
+    /**
+     *  test getlevel method of Label
+     * @param
+     */
     public void testGetLevel() {
         Level level = this.label.getLevel();
         System.out.println("Level name - " + level.getName());
@@ -87,50 +133,73 @@ public class TestLabel {
         System.out.println("Floorthickness - " + String.valueOf(level.getFloorThickness()));
         System.out.println("Height - " + String.valueOf(level.getHeight()));
     }
-        
+      
+    /**
+     *  test isatlevel method of Label
+     * @param
+     */      
     public void testIsAtLevel(Level l) {
         System.out.println("Is at Level - " + String.valueOf(this.label.isAtLevel(l)));
     }
-       
+     
+    /**
+     *  test getpoint method of Label
+     * @param
+     */
     public void testGetPoints() {
         float [][] points = this.label.getPoints();
         System.out.println("Points - " + Arrays.deepToString(points));
     }
     
-    public void testAddPropertyChangeListener() {}
+    /**
+     *  test addPropertyChangeListener method of Label
+     * @param
+     */
+    public void testAddPropertyChangeListener(PropertyChangeListener l) {
+        this.label.addPropertyChangeListener(l);
+    }
     
-    public void testRemovePropertyChangeListener() {}
+    /**
+     *  test removePropertyChangeListener method of Label
+     * @param
+     */
+    public void testRemovePropertyChangeListener(PropertyChangeListener l) {
+        this.label.removePropertyChangeListener(l);
+    }
     
     
-    
+    /**
+     *  test intersectsRectangle method of Label
+     * @param
+     */
     public void testIntersectsRectangle(float a, float b, float c, float d){
         System.out.println("Intersects Rectanle - " + String.valueOf(this.label.intersectsRectangle(a,b,c,d)));
     }
     
+    /**
+     *  test containsPoint method of Label
+     * @param
+     */
     public void testContainsPoint(float x, float y, float m){        
         System.out.println("Contains point - " + String.valueOf(this.label.containsPoint(x,y,m)));
     }
     
+    /**
+     *  test move method of Label
+     * @param
+     */
     public void testMove(float a, float b){
         this.label.move(a,b);
     }
-    
+     /**
+     *  test clone method of Label
+     * @param
+     */
     public void testClone(){
         Label clone = this.label.clone();
         System.out.println("Cloned label - " + clone.getText());
     }
-   
-    public void testReadObject(){}
-    
-    
-    /**
-     *  test readObject method of Label
-     * @param in
-     */
-    public void testAddPropertyChangeListener(PropertyChangeListener listener){
-        this.label.addPropertyChangeListener(listener);
-    }
-    
+      
 
 	/**
 	 * run the test cases
@@ -152,6 +221,14 @@ public class TestLabel {
         Level level = new Level("level-1", 25, 10, 100);
         tester.testSetLevel(level);
         
+        PropertyChangeListener activeWindowListener = new PropertyChangeListener() {
+          public void propertyChange(PropertyChangeEvent ev) {
+            System.out.println("No window should be displayed for short task");
+          }
+        };
+        tester.testAddPropertyChangeListener(activeWindowListener);
+        tester.testRemovePropertyChangeListener(activeWindowListener);
+        
         System.out.println("\nTesting Getters.....");
         tester.testGetText();
         tester.testGetX();
@@ -163,7 +240,10 @@ public class TestLabel {
         tester.testGetPoints();        
         
         System.out.println("\nTesting othe methods.....");
-        tester.testIntersectsRectangle
+        tester.testIntersectsRectangle(10,10,10,10);
+        tester.testContainsPoint(10,10,10);
+        tester.testMove(20,30);
+        tester.testClone();
 	}
 
 }
