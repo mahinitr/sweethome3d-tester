@@ -1,0 +1,18 @@
+Select a method, function or procedure from your project. Make sure no other team member selects the same method. You may reuse any other method you may have selected for Black Box testing.
+Derive the flow graph and calculate the cyclomatic complexity.
+Share your calculations with the rest of the team to verify that they are correct.
+Write a new class with as many test cases as the cyclomatic complexity.
+The class performing the test needs to have detailed documentation on how the cyclomatic complexity was obtained.
+Write the required stubs in additional classes if needed so that the test is self-contained (runs simply by compiling and executing a single class file).
+The test should explicitly report their outcome by returning a Boolean result.
+
+
+
+Select one class that is part of your product. The class has to have at least 5 methods.
+Write a test case that provides complete coverage of the following aspects with respect to the class:
+Setting and accessing all the variables.
+Testing all the methods in the object.
+Testing all the object state (if applicable).
+
+Analyze the code in the class for which you have written the test case. Select (at least two) additional classes that use the one you tested to build a bottom-up test case.
+Combine the class for which you already have the test cases with the additional classes and write a test that exercises the functionality provided by these classes. Testing the access to the attributes is no longer required. Your test has to focus on executing the functionality resulting from combining all the classes.
